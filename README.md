@@ -15,4 +15,5 @@ Kiosk is a part of the Sui framework, and it is native to the system and availab
 ## Kiosk Indexer Documentation
 
 [Dashboard Documentaion](https://github.com/venture-23/sui-kiosk-indexer-apidocumentation/blob/main/Dashboard%20Documentation.md)
+
 [API Documentaion](https://github.com/venture-23/sui-kiosk-indexer-apidocumentation/blob/main/Dashboard%20Documentation.md)
