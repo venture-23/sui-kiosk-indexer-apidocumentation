@@ -83,7 +83,7 @@ When a user clicks to view all available kiosks, the system will display a list 
 
 In this section, users can access essential information about the kiosk including ID, Owner, Ownership Type, Data Type, Total number of Items, Last TXN Block, Current Profit, Allow Extensions Status, Version and Timestamps.
 
-## <a name="_kqhtcm1jvpn5"></a>6 Other Details (Section 3)
+## <a name="_kqhtcm1jvpn5"></a>6 Other Details (Section 2)
 
 In this section, users can access additional information related to a specific kiosk, which is organized within the tab.
 
