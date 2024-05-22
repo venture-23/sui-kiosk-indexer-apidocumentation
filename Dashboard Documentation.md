@@ -2,7 +2,7 @@
 
 # <a name="_5mg51hnk918g"></a>Dashboard Data and Graphs
 
-![](assets/Aspose.Words.004196a2-2b77-4a38-8f81-1766b9c8ea36.001.png)
+![](assets/Aspose.Words.2a47cb0d-6278-48db-89fe-95dd1a497e67.001.png)
 
 ## <a name="_13dyc7v9alx8"></a>1 Header (Section 1)
 
@@ -13,6 +13,13 @@ Users can return to the landing page by clicking on the logo.
 ### <a name="_jlw49fvkg37s"></a>1.2 Search Bar
 
 Users can search for any kiosk-related object or transaction using the search bar. This search feature allows them to access detailed information about the object or transaction they are looking for.
+
+### <a name="_puxwwtnrefmw"></a>1.2 Menu Bar
+
+Users can navigate to different pages from the menu bar. There are two menus maintained:
+
+- Kiosks
+- Kiosk Transactions
 
 ## <a name="_zfzwdgwlx2rr"></a>2 Data Overview (Section 2)
 
@@ -70,47 +77,43 @@ When a user clicks to view all available kiosks, the system will display a list 
 
 # <a name="_iqi4mh5gtb1g"></a>Kiosk Detail
 
-![](assets/Aspose.Words.004196a2-2b77-4a38-8f81-1766b9c8ea36.002.png)
+![](assets/Aspose.Words.2a47cb0d-6278-48db-89fe-95dd1a497e67.002.png)
 
 ## <a name="_9gmppj9uihqf"></a>5 Kiosk Details (Section 1)
 
 In this section, users can access essential information about the kiosk including ID, Owner, Ownership Type, Data Type, Total number of Items, Last TXN Block, Current Profit, Allow Extensions Status, Version and Timestamps.
 
-## <a name="_gdnbjuapf0ev"></a>6 Dynamic Fields (Section 2)
-
-In this section, users can access information about the dynamic fields associated with a specific kiosk.
-
-## <a name="_kqhtcm1jvpn5"></a>7 Other Details (Section 3)
+## <a name="_kqhtcm1jvpn5"></a>6 Other Details (Section 3)
 
 In this section, users can access additional information related to a specific kiosk, which is organized within the tab.
 
-### <a name="_d9vm5o1owges"></a>7.1 Items
+### <a name="_d9vm5o1owges"></a>6.1 Items
 
 In this tab, users can access a list of items associated with a specific kiosk. The information is organized using an accordion format for easy navigation and reference.
 
 Each item includes key details such as: Id, Name, Description, Owner, ownership Type, Version and Status.
 
-### <a name="_7bu78i2j0650"></a>7.2 Transactions
+### <a name="_7bu78i2j0650"></a>6.2 Transactions
 
 In this tab, users can access a list of transactions associated with a specific kiosk. The information is organized using an accordion format for easy navigation and reference.
 
 Each item includes key details such as: Id, Name, Description, Owner, ownership Type, Version and Status.
 
-### <a name="_q5y7dwurg178"></a>7.3 Item History
+### <a name="_q5y7dwurg178"></a>6.3 Item History
 
 In this tab, user can get the information about the history of specific kiosk including
 
-### <a name="_lmcloyd2gxwn"></a>7.4 Withdrawal
+### <a name="_lmcloyd2gxwn"></a>6.4 Withdrawal
 
 In this tab, users can get the withdrawal information of the particular kiosk.
 
-### <a name="_cqy186uxap2c"></a>7.5 Extensions
+### <a name="_cqy186uxap2c"></a>6.5 Extensions
 
 In this tab, users can get the list of extensions and the information about each extension.
 
 # <a name="_vqyfosu71479"></a>Object Detail
 
-![](assets/Aspose.Words.004196a2-2b77-4a38-8f81-1766b9c8ea36.003.png)
+![](assets/Aspose.Words.2a47cb0d-6278-48db-89fe-95dd1a497e67.003.png)
 
 ## <a name="_nzr3kko48jz6"></a>8 Object Details (Section 1)
 
@@ -126,7 +129,7 @@ In this section, users can access Object policies, balance and rules. On further
 
 # <a name="_1z5o95af1fy4"></a>Transaction Detail
 
-![](assets/Aspose.Words.004196a2-2b77-4a38-8f81-1766b9c8ea36.004.png)
+![](assets/Aspose.Words.2a47cb0d-6278-48db-89fe-95dd1a497e67.004.png)
 
 ## <a name="_hxio2tbh1rob"></a>10 Transaction Details (Section 1)
 
@@ -138,8 +141,36 @@ In this section, users can access additional information related to a specific k
 
 ### <a name="_cpgtw4tk2nxi"></a>11.1 Inputs
 
+Input refers to the initial data required to initiate a transaction. In the context of a Kiosk transaction, the inputs can include:
+
+- Sender’s Address: The address initiating the transaction.
+- Recipient’s Address: The address receiving the transaction output.
+- Transaction Type: Specifies the nature of the transaction (e.g., creation of a kiosk, interaction with a kiosk).
+- Parameters: These are the specific inputs required for the transaction type. For instance, creating a kiosk might require details about the kiosk configuration, while interacting with a kiosk might need information about the item or service being accessed.
+
 ### <a name="_24wnmw7z1ty2"></a>11.2 Transactions
+
+Move Call is the invocation of the Move smart contract, which is Sui's native smart contract language. In the context of Kiosk transactions, the Move Call can involve several actions:
+
+- Function Invocation: The specific function within the Move smart contract that is being called. For example, create_kiosk, add_item_to_kiosk, or purchase_item.
+- Function Arguments: The arguments passed to the function. These can include the sender’s address, kiosk identifier, item details, and any other necessary parameters.
+- Execution Logic: The logic defined within the Move smart contract that handles the transaction. This can involve state changes, validations, and other operations.
 
 ### <a name="_h1dug5m2ku06"></a>11.3 Object Changes
 
+Object Changes refer to the modifications in the state of the objects on the blockchain as a result of the transaction. In Kiosk-related transactions, these changes can include:
+
+- Creation of New Objects: For instance, creating a new kiosk object with a unique identifier and initial properties.
+- State Updates: Updating the state of existing objects. For example, adding a new item to an existing kiosk or updating the stock levels of items in the kiosk.
+- Ownership Transfers: Changing the ownership of items or kiosks, such as transferring an item from the kiosk to a buyer.
+- Deletions: Removing objects from the state, such as removing an item that has been sold out or a kiosk that has been decommissioned.
+
 ### <a name="_ln5wswlvi7j8"></a>11.4 Events
+
+Events are emitted during the execution of a transaction to signal that specific actions have taken place. In Kiosk transactions, events can provide important information such as:
+
+- Kiosk Creation Event: Emitted when a new kiosk is created, providing details like the kiosk identifier and owner.
+- Item Addition Event: Emitted when a new item is added to a kiosk, including details like the item identifier, description, and price.
+- Purchase Event: Emitted when an item is purchased from a kiosk, detailing the buyer’s address, the item purchased, and the transaction amount.
+- Stock Update Event: Emitted when the stock levels of an item in the kiosk are updated, indicating the new stock level.
+- Ownership Change Event: Emitted when the ownership of a kiosk or item changes, providing information about the new owner and the asset involved.
