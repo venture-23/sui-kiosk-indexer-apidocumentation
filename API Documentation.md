@@ -1,6 +1,5 @@
 # KIOSK INDEXER API
 
-
 ## Responses
 
 API endpoints return the JSON representation of the resources created or edited. However, if an invalid request is submitted, or some other error occurs, returns a JSON response in the following format:
@@ -23,39 +22,42 @@ The `data` attribute contains any other metadata associated with the response. T
 
 Gophish returns the following status codes in its API:
 
-| Status Code | Description |
-| :--- | :--- |
-| 200 | `OK` |
-| 201 | `CREATED` |
-| 400 | `BAD REQUEST` |
-| 404 | `NOT FOUND` |
-| 500 | `INTERNAL SERVER ERROR` |
-
+| Status Code | Description             |
+| :---------- | :---------------------- |
+| 200         | `OK`                    |
+| 201         | `CREATED`               |
+| 400         | `BAD REQUEST`           |
+| 404         | `NOT FOUND`             |
+| 500         | `INTERNAL SERVER ERROR` |
 
 - APIs
-    - [Basic](#basic)
-        * ReadOnly APIs
-            + [kiosks](#get_kiosks)
-            + [kiosk detail](#get_kiosk_detail)
-            + [object detail](#get_object_detail)
-            + [items](#get_items)
-            + [summary metric](#get_kiosk_summary)
-            + [kiosk item history](#get_kiosk_item_history)
-            + [kiosk transactions](#get_kiosk_transactions)
-            + [single kiosk transactions](#get_single_kiosk_transactions)
-            + [kiosk extensions](#get_kiosk_extensions)
-            + [kiosk profit withdraws](#get_kiosk_profit_withdraws)
-            + [kiosk graph](#get_kiosk_graph)
-            + [item transfer policies](#get_item_transfer_policies)
-            + [transaction details](#get_transaction_details)
-            + [search](#search)
+  - [Basic](#basic)
+    - ReadOnly APIs
+      - [kiosks](#get_kiosks)
+      - [kiosks of owner](#get_owner's_kiosks)
+      - [kiosk detail](#get_kiosk_detail)
+      - [object detail](#get_object_detail)
+      - [items](#get_items)
+      - [items of owner](#get_owner's_item)
+      - [summary metric](#get_kiosk_summary)
+      - [kiosk item history](#get_kiosk_item_history)
+      - [kiosk transactions](#get_kiosk_transactions)
+      - [single kiosk transactions](#get_single_kiosk_transactions)
+      - [kiosk extensions](#get_kiosk_extensions)
+      - [kiosk profit withdraws](#get_kiosk_profit_withdraws)
+      - [kiosk graph](#get_kiosk_graph)
+      - [item transfer policies](#get_item_transfer_policies)
+      - [transaction details](#get_transaction_details)
+      - [search](#search)
 
 ### get_kiosks
 
 #### Overview
+
 This API provides access to information about kiosks.
 
 #### Base URL
+
 ```
 https://kioskapp.venture23.xyz/api/v1/
 ```
@@ -63,12 +65,14 @@ https://kioskapp.venture23.xyz/api/v1/
 #### Endpoints
 
 ##### Get Kiosks
+
 ```
 GET /kiosks
 ```
-#### Description
-Retrieve a list of kiosks with optional filtering, sorting, and pagination.
 
+#### Description
+
+Retrieve a list of kiosks with optional filtering, sorting, and pagination.
 
 #### Parameters
 
@@ -79,11 +83,13 @@ Retrieve a list of kiosks with optional filtering, sorting, and pagination.
 - `prev_cursor` (optional): Cursor for pagination. If provided, it retrieves the previous page of results.
 
 #### Example Request
+
 ```
 curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosks?limit=1&sort_by=items&direction=desc&next_cursor=&prev_cursor='
 ```
 
 #### Example Response
+
 ```
 {
     "data": [
@@ -133,13 +139,83 @@ curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosks?limit=1&sort_by=it
 }
 ```
 
-
-###  get_kiosk_detail
+### get_owner's_kiosks
 
 #### Overview
+
+This API provides access to information about kiosk of particular owner.
+
+#### Base URL
+
+```
+https://kioskapp.venture23.xyz/api/v1/
+```
+
+#### Endpoints
+
+##### Get Kiosks
+
+```
+GET kiosks/account/{owner_id}
+```
+
+#### Description
+
+Retrieve a list of kiosks with optional filtering, sorting, and pagination.
+
+#### Parameters
+
+- `limit` (optional): The maximum number of kiosks to return per page. Default is 20.
+- `next_cursor` (optional): Cursor for pagination. If provided, it retrieves the next page of results.
+- `prev_cursor` (optional): Cursor for pagination. If provided, it retrieves the previous page of results.
+
+#### Example Request
+
+```
+curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosks/account/0xc0a7b1e6c40870567c6f916bc578161823dfaec0cc6841622b124f15638fc792?limit=5&next_cursor=""'
+```
+
+#### Example Response
+
+```
+{
+    "data": [
+        {
+            "kiosk_id": "0x2e49e8dd47577b27e4d386ae04e4c853150d43e5cf1af2382204c8700c442ccc",
+            "version": "1173621",
+            "owner": "0xc0a7b1e6c40870567c6f916bc578161823dfaec0cc6841622b124f15638fc792",
+            "item_count": 6,
+            "profits": "210000000",
+            "mutated_at": 1720679347378
+        },
+        {
+            "kiosk_id": "0xac06e8500db047bf13429fceed20c92a4d5ee0559be932d2ba1112aa4327632f",
+            "version": "1173616",
+            "owner": "0xc0a7b1e6c40870567c6f916bc578161823dfaec0cc6841622b124f15638fc792",
+            "item_count": 3,
+            "profits": "0",
+            "created_at": 1720679286391,
+            "mutated_at": 1720679330593
+        }
+    ],
+    "page_info": {
+        "limit": 5,
+        "total": 0,
+        "next_cursor": "\"\"",
+        "prev_cursor": null,
+        "direction": "Next"
+    }
+}
+```
+
+### get_kiosk_detail
+
+#### Overview
+
 This API endpoint provides detailed information about a specific kiosk.
 
 #### Base URL
+
 ```
 https://kioskapp.venture23.xyz/api/v1/
 ```
@@ -147,21 +223,27 @@ https://kioskapp.venture23.xyz/api/v1/
 #### Endpoints
 
 ##### Get Kiosk Detail
+
 ```
 GET /kiosk/detail/{kiosk_id}
 ```
+
 #### Description
+
 Retrieve detailed information about a specific kiosk identified by its ID.
 
 #### Parameters
+
 - {kiosk_id}: The unique identifier of the kiosk.
 
 #### Example Request
+
 ```
 curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/detail/0x25f7579bf0baadc72a80357141a0e2e0ff06914a2c832ba1f474f55930d4a4eb'
 ```
 
 #### Example Response
+
 ```
 {
     "id": "0x25f7579bf0baadc72a80357141a0e2e0ff06914a2c832ba1f474f55930d4a4eb",
@@ -227,7 +309,6 @@ curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/detail/0x25f7579bf0
 
 ```
 
-
 <!-- ### get_kiosk_details
 
 Returns information about single kiosk
@@ -243,7 +324,7 @@ curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/detail/0x720396e6f8
 
 *Parameters:*
 
-| Name | Type | Description                                                    | 
+| Name | Type | Description                                                    |
 |:------------|:-----|:--------------------------------------------------------|
 | kiosk_id    | str  | Kiosk object id                                         |
 
@@ -314,13 +395,14 @@ curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/detail/0x720396e6f8
 }
 ``` -->
 
-
 ### get_items
 
 #### Overview
+
 This API endpoint provides information about items associated with a specific kiosk.
 
 #### Base URL
+
 ```
 https://kioskapp.venture23.xyz/api/v1/
 ```
@@ -328,12 +410,14 @@ https://kioskapp.venture23.xyz/api/v1/
 #### Endpoints
 
 ##### Get Kiosks Items
+
 ```
 GET /kiosk/items/{kiosk_id}
 ```
-#### Description
-Retrieve information about items associated with a specific kiosk identified by its ID, with optional limit, sorting, and pagination.
 
+#### Description
+
+Retrieve information about items associated with a specific kiosk identified by its ID, with optional limit, sorting, and pagination.
 
 #### Parameters
 
@@ -343,11 +427,13 @@ Retrieve information about items associated with a specific kiosk identified by 
 - `prev_cursor` (optional): Cursor for pagination. If provided, it retrieves the previous page of results.
 
 #### Example Request
+
 ```
 curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/items/0x25f7579bf0baadc72a80357141a0e2e0ff06914a2c832ba1f474f55930d4a4eb?next_cursor=&prev_cursor=&limit=1'
 ```
 
 #### Example Response
+
 ```
 {
     "data": [
@@ -422,15 +508,181 @@ curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/items/0x25f7579bf0b
 }
 ```
 
-
-
-
-###  get_object_detail
+### get_owner's_item
 
 #### Overview
+
+This API provides access to information about items inside all the kiosk of particular owner.
+
+#### Base URL
+
+```
+https://kioskapp.venture23.xyz/api/v1/
+```
+
+#### Endpoints
+
+##### Get Kiosks
+
+```
+GET /account/{owner_id}
+```
+
+#### Description
+
+Retrieve a list of items in all the kiosk with optional filtering, sorting, and pagination.
+
+#### Parameters
+
+- `page.limit` (optional): The maximum number of kiosks to return per page. Default is 20.
+- `sort.field` (optional): The field to sort the kiosks by. Possible values are `items`, `created_at`, `updated_at`, `profit`. Default is `-created_at`,
+- `sort.direction` (optional): The direction of sorting. Possible values are `asc` (ascending) and `desc` (descending).
+- `page.next_cursor` (optional): Cursor for pagination. If provided, it retrieves the next page of results.
+- `page.prev_cursor` (optional): Cursor for pagination. If provided, it retrieves the previous page of results.
+- `show` (optional): The field to filter item list by. Possible values are `all`, `listed`,`nonlisted`.
+- `details` (optional): The field to get item list with or without item details. Possible values are `true`, `false`.
+
+#### Example Request
+
+```
+curl --location 'https://kioskapp.venture23.xyz/api/v1account/0xc0a7b1e6c40870567c6f916bc578161823dfaec0cc6841622b124f15638fc792/kiosk/items?page.limit=20&page.next_cursor=eyJpZCI6IjB4YmJhODFlNjgxZWI3NmViNjc0ZWNjZWNkYjBlNjIzMjUxOTRkYTQxMjMxYTFmNjViMTc5NTE5M2MwNDRiZDgxZSJ9&details=true&show=nonlisted&sort.field=name&sort.direction=asc
+```
+
+#### Example Response
+
+```
+{
+    "data": [
+        {
+            "object_id": "0x16a648992a572d4a5850a3b87f9f4f030f7a7b3dcc7cf754673cf9ec4dc067b3",
+            "item_id": "0x054e2051fa0d2f39f4fdc13c641348ac14fb682f23d41b2c0d0a3848dc1f58dd",
+            "type": "0x2::dynamic_field::Field<0x2::dynamic_object_field::Wrapper<0x2::kiosk::Item>, 0x2::object::ID>",
+            "kiosk_id": "0x2e49e8dd47577b27e4d386ae04e4c853150d43e5cf1af2382204c8700c442ccc",
+            "created_at": 1720679299476,
+            "item_detail": {
+                "object_id": "0x054e2051fa0d2f39f4fdc13c641348ac14fb682f23d41b2c0d0a3848dc1f58dd",
+                "type": "0xacc8056d9c5e4ff5d70a9bb87b078a540f77b4e7099702d4e002d4826c393841::nft::Sword",
+                "version": "1173604",
+                "previous_transaction": "BEMTHtzrKX5K47dBop7fg9oWjCXK81GrBzi23h5vC6g4",
+                "fields": {
+                    "description": "Selling Rare NFT",
+                    "id": {
+                        "id": "0x054e2051fa0d2f39f4fdc13c641348ac14fb682f23d41b2c0d0a3848dc1f58dd"
+                    },
+                    "name": "Kiosk NFT",
+                    "strength": "50",
+                    "url": "https://img.freepik.com/free-vector/hand-drawn-nft-style-ape-illustration_23-2149622021.jpg"
+                }
+            }
+        },
+        {
+            "object_id": "0x17da9a64154adec159cdd22b132529b606bb3f1de84c678af7db42e5843e6439",
+            "item_id": "0x65d91dd40c36a4753f2e62cc83331da7a5bd1cd4bfc98b3c6aaad762478e0272",
+            "type": "0x2::dynamic_field::Field<0x2::dynamic_object_field::Wrapper<0x2::kiosk::Item>, 0x2::object::ID>",
+            "kiosk_id": "0xac06e8500db047bf13429fceed20c92a4d5ee0559be932d2ba1112aa4327632f",
+            "created_at": 1720679330593,
+            "item_detail": {
+                "object_id": "0x65d91dd40c36a4753f2e62cc83331da7a5bd1cd4bfc98b3c6aaad762478e0272",
+                "type": "0xacc8056d9c5e4ff5d70a9bb87b078a540f77b4e7099702d4e002d4826c393841::nft::Sword",
+                "version": "1173616",
+                "previous_transaction": "GGqRvLtSPEdeQ7tm3TnHZvr9bNgGydYTPqNNgh7Rjv9w",
+                "fields": {
+                    "description": "Selling Rare NFT",
+                    "id": {
+                        "id": "0x65d91dd40c36a4753f2e62cc83331da7a5bd1cd4bfc98b3c6aaad762478e0272"
+                    },
+                    "name": "Kiosk NFT",
+                    "strength": "50",
+                    "url": "https://img.freepik.com/free-vector/hand-drawn-nft-style-ape-illustration_23-2149622021.jpg"
+                }
+            }
+        },
+        {
+            "object_id": "0x1ea8ad577937856820d166973d79a35231636ee5a2809ce8630b9d3ae1f8164a",
+            "item_id": "0xc9e8bd692105016a4a63d8b532ca211602058657019b2799cc305cad14ae8616",
+            "type": "0x2::dynamic_field::Field<0x2::dynamic_object_field::Wrapper<0x2::kiosk::Item>, 0x2::object::ID>",
+            "kiosk_id": "0x2e49e8dd47577b27e4d386ae04e4c853150d43e5cf1af2382204c8700c442ccc",
+            "created_at": 1720679322404,
+            "item_detail": {
+                "object_id": "0xc9e8bd692105016a4a63d8b532ca211602058657019b2799cc305cad14ae8616",
+                "type": "0xacc8056d9c5e4ff5d70a9bb87b078a540f77b4e7099702d4e002d4826c393841::nft::Sword",
+                "version": "1173613",
+                "previous_transaction": "EYJdMgastyuWRC3aPmU5rm4pR7ApXV4HfFwUWPD5LraH",
+                "fields": {
+                    "description": "Selling Rare NFT",
+                    "id": {
+                        "id": "0xc9e8bd692105016a4a63d8b532ca211602058657019b2799cc305cad14ae8616"
+                    },
+                    "name": "Kiosk NFT",
+                    "strength": "50",
+                    "url": "https://img.freepik.com/free-vector/hand-drawn-nft-style-ape-illustration_23-2149622021.jpg"
+                }
+            }
+        },
+        {
+            "object_id": "0x49ed48aeba07a4a0f778ff904915fbc98f2fbb971dfd66270836efca28b0fda8",
+            "item_id": "0xaf5d1140e4e0c926a7d3ed25b7b8d74c4d94a5713e0adf41d7581cf1607a4358",
+            "type": "0x2::dynamic_field::Field<0x2::dynamic_object_field::Wrapper<0x2::kiosk::Item>, 0x2::object::ID>",
+            "kiosk_id": "0x2e49e8dd47577b27e4d386ae04e4c853150d43e5cf1af2382204c8700c442ccc",
+            "created_at": 1720679317575,
+            "item_detail": {
+                "object_id": "0xaf5d1140e4e0c926a7d3ed25b7b8d74c4d94a5713e0adf41d7581cf1607a4358",
+                "type": "0xacc8056d9c5e4ff5d70a9bb87b078a540f77b4e7099702d4e002d4826c393841::nft::Sword",
+                "version": "1173611",
+                "previous_transaction": "FSXbTDaiBj4bpzTfgyccNGQFHSi533RHVSw32zsFjAWr",
+                "fields": {
+                    "description": "Selling Rare NFT",
+                    "id": {
+                        "id": "0xaf5d1140e4e0c926a7d3ed25b7b8d74c4d94a5713e0adf41d7581cf1607a4358"
+                    },
+                    "name": "Kiosk NFT",
+                    "strength": "50",
+                    "url": "https://img.freepik.com/free-vector/hand-drawn-nft-style-ape-illustration_23-2149622021.jpg"
+                }
+            }
+        },
+        {
+            "object_id": "0x86667ec3e40f94f5f8226b0e07ac028ca3215bb1a8013b70081ae1655e2f4c31",
+            "item_id": "0x6f707e5a7a3f9289855006c79d13394634a1b82c9869055b406b210bcfc7e7fb",
+            "type": "0x2::dynamic_field::Field<0x2::dynamic_object_field::Wrapper<0x2::kiosk::Item>, 0x2::object::ID>",
+            "kiosk_id": "0x2e49e8dd47577b27e4d386ae04e4c853150d43e5cf1af2382204c8700c442ccc",
+            "created_at": 1720679311795,
+            "item_detail": {
+                "object_id": "0x6f707e5a7a3f9289855006c79d13394634a1b82c9869055b406b210bcfc7e7fb",
+                "type": "0xacc8056d9c5e4ff5d70a9bb87b078a540f77b4e7099702d4e002d4826c393841::nft::Sword",
+                "version": "1173609",
+                "previous_transaction": "FXnWbmCePBDmQBgmjNQmp1KUuCADY3WrDA1qqXa5a76d",
+                "fields": {
+                    "description": "Selling Rare NFT",
+                    "id": {
+                        "id": "0x6f707e5a7a3f9289855006c79d13394634a1b82c9869055b406b210bcfc7e7fb"
+                    },
+                    "name": "Kiosk NFT",
+                    "strength": "50",
+                    "url": "https://img.freepik.com/free-vector/hand-drawn-nft-style-ape-illustration_23-2149622021.jpg"
+                }
+            }
+        }
+    ],
+    "page_info": {
+        "limit": 20,
+        "total": 0,
+        "next_cursor": "eyJpZCI6IjB4YmJhODFlNjgxZWI3NmViNjc0ZWNjZWNkYjBlNjIzMjUxOTRkYTQxMjMxYTFmNjViMTc5NTE5M2MwNDRiZDgxZSJ9",
+        "prev_cursor": null,
+        "direction": "Next"
+    }
+}
+
+```
+
+### get_object_detail
+
+#### Overview
+
 This API provides access to information about objects.
 
 #### Base URL
+
 ```
 https://kioskapp.venture23.xyz/api/v1/
 ```
@@ -438,21 +690,27 @@ https://kioskapp.venture23.xyz/api/v1/
 #### Endpoints
 
 ##### Get Object
+
 ```
 GET /object/{object_id}
 ```
+
 #### Description
+
 Retrieve details about a specific object.
 
 #### Parameters
+
 - {object_id} (required): The unique identifier of the object.
 
 #### Example Request
+
 ```
 curl --location 'https://kioskapp.venture23.xyz/api/v1/object/0xb11c8abb2c1b00facaeb5d584b01d3db5c3f9c9b56adb7789e4120a4e9708bb8'
 ```
 
 #### Example Response
+
 ```
 {
     "_id": "0xb11c8abb2c1b00facaeb5d584b01d3db5c3f9c9b56adb7789e4120a4e9708bb8",
@@ -666,20 +924,25 @@ curl --location 'https://kioskapp.venture23.xyz/api/v1/object/0xb11c8abb2c1b00fa
 ### get_kiosk_transactions
 
 #### Overview
+
 This API provides access to information about transactions related to all the kiosks.
 
 #### Base URL
+
 ```
 https://kioskapp.venture23.xyz/api/v1/
 ```
 
 #### Endpoints
 
-##### Get  Kiosk Transactions
+##### Get Kiosk Transactions
+
 ```
 GET /kiosks/transactions
 ```
+
 #### Description
+
 Retrieve details about transactions related to kiosks.
 
 #### Parameters
@@ -688,11 +951,13 @@ Retrieve details about transactions related to kiosks.
 - `offset` (optional): Offset for pagination. Default is 0.
 
 #### Example Request
+
 ```
 curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/transactions?limit=1&offset=0'
 ```
 
 #### Example Response
+
 ```
 {
     "data": [
@@ -816,16 +1081,14 @@ curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/transactions?limit=
 
 ```
 
-
-
-
-
 ### get_single_kiosk_transactions
 
 #### Overview
+
 This API provides transaction data associated with a specific kiosk.
 
 #### Base URL
+
 ```
 https://kioskapp.venture23.xyz/api/v1/
 ```
@@ -833,10 +1096,13 @@ https://kioskapp.venture23.xyz/api/v1/
 #### Endpoints
 
 ##### Get Single Kiosk Transactions
+
 ```
 Retrieve transaction data associated with a specific kiosk.
 ```
+
 #### Description
+
 Retrieve transaction data associated with a specific kiosk.
 
 #### Parameters
@@ -847,11 +1113,13 @@ Retrieve transaction data associated with a specific kiosk.
 - `offset` (optional): Offset for pagination. Default is 0.
 
 #### Example Request
+
 ```
 curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/0x25f7579bf0baadc72a80357141a0e2e0ff06914a2c832ba1f474f55930d4a4eb/transactions?limit=1&&offset=0'
 ```
 
 #### Example Response
+
 ```
 {
     "data": [
@@ -938,12 +1206,14 @@ curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/0x25f7579bf0baadc72
 
 ```
 
-###  get_kiosk_summary
+### get_kiosk_summary
 
 #### Overview
+
 This API provides access to information about objects.
 
 #### Base URL
+
 ```
 https://kioskapp.venture23.xyz/api/v1/
 ```
@@ -951,19 +1221,23 @@ https://kioskapp.venture23.xyz/api/v1/
 #### Endpoints
 
 ##### Get Kiosk Summary
+
 ```
 GET /kiosk/summary
 ```
+
 #### Description
 
 Retrieve a summary of statistics related to kiosks.
 
 #### Example Request
+
 ```
 curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/summary'
 ```
 
 #### Example Response
+
 ```
 {
     "kiosks": 177,
@@ -976,12 +1250,14 @@ curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/summary'
 
 ```
 
-###  get_kiosk_item_history
+### get_kiosk_item_history
 
 #### Overview
+
 This API provides a history of actions performed on items associated with a specific kiosk.
 
 #### Base URL
+
 ```
 https://kioskapp.venture23.xyz/api/v1/
 ```
@@ -989,24 +1265,27 @@ https://kioskapp.venture23.xyz/api/v1/
 #### Endpoints
 
 ##### Get Kiosk Item History
+
 ```
 GET /kiosk/<kiosk_id>/items/history
 ```
+
 #### Description
 
 Retrieve a history of actions performed on items associated with a specific kiosk.
-
 
 #### Parameters
 
 - `kiosk_id` (required): The ID of the kiosk.
 
 #### Example Request
+
 ```
 curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/0x25f7579bf0baadc72a80357141a0e2e0ff06914a2c832ba1f474f55930d4a4eb/items/history'
 ```
 
 #### Example Response
+
 ```
 {
     "0xd9d02a4ee098eb2ccf1d4af7ebb919324e26ff0f645b5bcac118867ac659f818": [
@@ -1029,12 +1308,14 @@ curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/0x25f7579bf0baadc72
 }
 ```
 
-###  get_kiosk_profit_withdraws
+### get_kiosk_profit_withdraws
 
 #### Overview
+
 This API endpoint allows you to retrieve information about withdrawals made from a specific kiosk.
 
 #### Base URL
+
 ```
 https://kioskapp.venture23.xyz/api/v1/
 ```
@@ -1046,22 +1327,25 @@ https://kioskapp.venture23.xyz/api/v1/
 ```
 GET /kiosk/<kiosk_id>/withdrawals
 ```
+
 #### Description
 
 Retrieve information about withdrawals made from a specific kiosk.
 
 #### Parameters
 
-- `kiosk_id` (required):  The ID of the kiosk for which you want to retrieve withdrawal information.
+- `kiosk_id` (required): The ID of the kiosk for which you want to retrieve withdrawal information.
 - `limit` (optional): Limit the number of transactions returned. Default is 20.
 - `offset` (optional): Offset for pagination. Default is 0.
 
 #### Example Request
+
 ```
 curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/0x25f7579bf0baadc72a80357141a0e2e0ff06914a2c832ba1f474f55930d4a4eb/items/history'
 ```
 
 #### Example Response
+
 ```
 {
     "data": [
@@ -1080,14 +1364,14 @@ curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/0x25f7579bf0baadc72
 
 ```
 
-
-
-###  get_kiosk_extensions
+### get_kiosk_extensions
 
 #### Overview
+
 This API provides information about extensions associated with a specific kiosk.
 
 #### Base URL
+
 ```
 https://kioskapp.venture23.xyz/api/v1/
 ```
@@ -1095,13 +1379,14 @@ https://kioskapp.venture23.xyz/api/v1/
 #### Endpoints
 
 ##### Get Kiosk Extensions
+
 ```
 GET /kiosks/<kiosk_id>/extensions
 ```
+
 #### Description
 
 Retrieve information about extensions associated with a specific kiosk.
-
 
 #### Parameters
 
@@ -1112,11 +1397,13 @@ Retrieve information about extensions associated with a specific kiosk.
 - `prev_cursor` (optional): Cursor for pagination. If provided, it retrieves the previous page of results.
 
 #### Example Request
+
 ```
 curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosks/0x18ed34f58368d5927a3789e0ed55c2948175f5548d3b4b4aa29bbbda8b6db1eb/extensions'
 ```
 
 #### Example Response
+
 ```
 {
     "data": [
@@ -1188,12 +1475,14 @@ curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosks/0x18ed34f58368d592
 
 ```
 
-###  get_kiosk_graph
+### get_kiosk_graph
 
 #### Overview
+
 This API endpoint allows you to retrieve graph data related to kiosks.
 
 #### Base URL
+
 ```
 https://kioskapp.venture23.xyz/api/v1/
 ```
@@ -1201,27 +1490,31 @@ https://kioskapp.venture23.xyz/api/v1/
 #### Endpoints
 
 ##### Get Kiosk Graph data
+
 ```
 GET /kiosk/graph
 ```
+
 #### Description
 
-This endpoint provides a graph of data related to the kiosk. The data can be items, withdrawals, or creations, depending on the parameter passed in the request. 
+This endpoint provides a graph of data related to the kiosk. The data can be items, withdrawals, or creations, depending on the parameter passed in the request.
 And the range of time with the frequency.
 
 #### Parameters
+
 - `graph` (required): graph for the given query params (creation/withdrawl/item)
 - `from` (required): start time of the range in Unix timestamp format.
 - `to` (required): the end time of the range in Unix timestamp format.
 - `freq` (required): the frequency at which data points should be aggregated, in this case, per day.
 
-
 #### Example Request
+
 ```
 curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/graph?graph=creation&from=1713112971&to=1715704971&freq=day'
 ```
 
 #### Example Response
+
 ```
 {
     "data": [
@@ -1238,9 +1531,11 @@ curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/graph?graph=creatio
 ### get_item_transfer_policies
 
 #### Overview
+
 This API provides information about transfer policies.
 
 #### Base URL
+
 ```
 https://kioskapp.venture23.xyz/api/v1/
 ```
@@ -1248,10 +1543,13 @@ https://kioskapp.venture23.xyz/api/v1/
 #### Endpoints
 
 ##### Get Item transfer policies
+
 ```
 GET /item-policy/{item_id}?limit=1
 ```
+
 #### Description
+
 This endpoint retrieves information about an item policy associated with the item.
 
 #### Parameters
@@ -1263,11 +1561,13 @@ This endpoint retrieves information about an item policy associated with the ite
 - `prev_cursor` (optional): Cursor for pagination. If provided, it retrieves the previous page of results.
 
 #### Example Request
+
 ```
 curl --location https://kioskapp.venture23.xyz/api/v1/item-policy/0xb11c8abb2c1b00facaeb5d584b01d3db5c3f9c9b56adb7789e4120a4e9708bb8?limit=1
 ```
 
 #### Example Response
+
 ```
 {
     "data": [
@@ -1356,13 +1656,14 @@ curl --location https://kioskapp.venture23.xyz/api/v1/item-policy/0xb11c8abb2c1b
 
 ```
 
-
 ### get_transaction_details
 
 #### Overview
+
 This API provides information about the transaction details
 
 #### Base URL
+
 ```
 https://kioskapp.venture23.xyz/api/v1/
 ```
@@ -1370,11 +1671,13 @@ https://kioskapp.venture23.xyz/api/v1/
 #### Endpoints
 
 ##### Get transaction details
+
 ```
 GET /tx/{tx_digest}
 ```
 
 #### Description
+
 This endpoint retrieves information about the transactions from the given digest.
 
 #### Parameters
@@ -1382,11 +1685,13 @@ This endpoint retrieves information about the transactions from the given digest
 - `tx_digest` : The unique identifier of transaction digest.
 
 #### Example Request
+
 ```
 curl --location https://kioskapp.venture23.xyz/api/v1/tx/V4CpxhJhvLVaApoEhX2aNcQHkDacGFLUFyNW9Wsrzr3
 ```
 
 #### Example Response
+
 ```
 {
     "tx_digest": "V4CpxhJhvLVaApoEhX2aNcQHkDacGFLUFyNW9Wsrzr3",
@@ -1591,19 +1896,14 @@ curl --location https://kioskapp.venture23.xyz/api/v1/tx/V4CpxhJhvLVaApoEhX2aNcQ
 }
 ```
 
-
-
-
-
-
-
-
 ### search
 
 #### Overview
+
 This API provides search for transaction digest and object id
 
 #### Base URL
+
 ```
 https://kioskapp.venture23.xyz/api/v1/
 ```
@@ -1611,11 +1911,13 @@ https://kioskapp.venture23.xyz/api/v1/
 #### Endpoints
 
 ##### Get search result
+
 ```
 GET /tx/{tx_digest}
 ```
 
 #### Description
+
 This endpoint retrieves information of the search request as per transaction digest or object id
 
 #### Parameters
@@ -1623,16 +1925,16 @@ This endpoint retrieves information of the search request as per transaction dig
 - `tx_digest/object_id` : The unique identifier of transaction digest or object id.
 
 #### Example Request
+
 ```
 curl --location https://kioskapp.venture23.xyz/api/v1/search/V4CpxhJhvLVaApoEhX2aNcQHkDacGFLUFyNW9Wsrzr3
 ```
 
 #### Example Response
+
 ```
 {
     "type":"Transaction",
     "data":"V4CpxhJhvLVaApoEhX2aNcQHkDacGFLUFyNW9Wsrzr3"
 }
 ```
-
-
