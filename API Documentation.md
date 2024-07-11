@@ -34,11 +34,11 @@ Gophish returns the following status codes in its API:
   - [Basic](#basic)
     - ReadOnly APIs
       - [kiosks](#get_kiosks)
-      - [kiosks of owner](#get_owner's_kiosks)
+      - [kiosks of owner](#get_kiosks_of_owner)
       - [kiosk detail](#get_kiosk_detail)
       - [object detail](#get_object_detail)
       - [items](#get_items)
-      - [items of owner](#get_owner's_item)
+      - [items of owner](#get_item_of_owner)
       - [summary metric](#get_kiosk_summary)
       - [kiosk item history](#get_kiosk_item_history)
       - [kiosk transactions](#get_kiosk_transactions)
@@ -139,7 +139,7 @@ curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosks?limit=1&sort_by=it
 }
 ```
 
-### get_owner's_kiosks
+### get_kiosks_of_owner
 
 #### Overview
 
@@ -508,7 +508,7 @@ curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/items/0x25f7579bf0b
 }
 ```
 
-### get_owner's_item
+### get_item_of_owner
 
 #### Overview
 
