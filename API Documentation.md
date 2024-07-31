@@ -33,7 +33,7 @@ Gophish returns the following status codes in its API:
 -   APIs
     -   [Basic](#basic)
         -   ReadOnly APIs
-            -   [kiosks](#get_kiosks)
+            -   [kiosks](#kiosks-list)
             -   [Kiosks by Sui Address](#kiosks-by-sui-address)
             -   [kiosk detail](#get_kiosk_detail)
             -   [object detail](#get_object_detail)
@@ -50,7 +50,7 @@ Gophish returns the following status codes in its API:
             -   [transaction details](#get_transaction_details)
             -   [search](#search)
 
-### get_kiosks
+### Kiosks List
 
 #### Overview
 
@@ -76,16 +76,17 @@ Retrieve a list of kiosks with optional filtering, sorting, and pagination.
 
 #### Parameters
 
--   `limit` (optional): The maximum number of kiosks to return per page. Default is 20.
--   `sort_by` (optional): The field to sort the kiosks by. Possible values are `items`, `created_at`, `updated_at`, `profit`. Default is `-created_at`,
--   `direction` (optional): The direction of sorting. Possible values are `asc` (ascending) and `desc` (descending).
--   `next_cursor` (optional): Cursor for pagination. If provided, it retrieves the next page of results.
--   `prev_cursor` (optional): Cursor for pagination. If provided, it retrieves the previous page of results.
+-   `account` (optional): Get kiosks by account address.
+-   `filter.{profit/item_count}.min/max` (Optional): Filter kiosks in range between min and max field_name value. For instance, filter.profit.min=10&filter.profit.min=100, gets all kiosks containing profits between 10 and 100.
+-   `page.limit` (optional): The maximum number of kiosks to return per page. Default is 20.
+-   `page.next_cursor` (optional): Cursor for pagination. If provided, it retrieves the next page of results.
+-   `sort.field` (optional): The field to sort the kiosks by. Possible values are fields in api response. Default is `-timestamp`,
+-   `sort.direction` (optional): The direction of sorting. Possible values are `asc` (ascending) and `desc` (descending).
 
 #### Example Request
 
 ```
-curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosks?limit=1&sort_by=items&direction=desc&next_cursor=&prev_cursor='
+curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosks?page.limit=1&sort.field=item_count&sort.direction=desc&page.next_cursor=&filter.profit.min=10'
 ```
 
 #### Example Response
@@ -93,46 +94,20 @@ curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosks?limit=1&sort_by=it
 ```
 {
     "data": [
-         {
-            "id": "0x25f7579bf0baadc72a80357141a0e2e0ff06914a2c832ba1f474f55930d4a4eb",
-            "version": 25033030,
-            "created_at": 1715603927683,
-            "updated_at": 1715603968197,
-            "type": {
-                "full": "0x2::kiosk::Kiosk",
-                "package": "0x2",
-                "module": "kiosk",
-                "struct": "Kiosk",
-                "generics": []
-            },
-            "owner": null,
-            "ownership_type": "Shared",
-            "initial_shared_version": 25033018,
-            "storage_rebate": 1611200,
-            "last_tx_block": "FrGehqGBq2Xi3jjMD1hYgpi7QktyCPukhK66BXnBUy4T",
-            "fields": {
-                "allow_extensions": {
-                    "value": false
-                },
-                "id": {
-                    "value": "0x25f7579bf0baadc72a80357141a0e2e0ff06914a2c832ba1f474f55930d4a4eb"
-                },
-                "item_count": {
-                    "value": 9
-                },
-                "owner": {
-                    "value": "0x0850b12520f4f23a1510cf23ae06a34c073c2582c47d59bdddc6b85a59253eb7"
-                },
-                "profits": {
-                    "value": "0"
-                }
-            }
+        {
+            "kiosk_id": "0xb9a4bb1d7d7666c78412e23123d2a86682fee7900fb4457b8eb6fe29e4e0fcfc",
+            "version": "1299498",
+            "owner": "0xc0a7b1e6c40870567c6f916bc578161823dfaec0cc6841622b124f15638fc792",
+            "item_count": 3,
+            "profit": 0.0,
+            "created_at": 1722428177489,
+            "mutated_at": 1722428212039
         }
     ],
     "page_info": {
         "limit": 1,
-        "total": 177,
-        "next_cursor": "ZQAAABJjcmVhdGVkX2F0AER69nGPAQAAAl9pZABDAAAAMHg4MjllZmY0ZDZmOGRmNmYxMzc3YjRmYjAxNjQ3Y2Y1YzAyMzQ1ZDU1YTM0MjEzNmRhNDljMWNjY2FiNDQ4OWU5AAA=",
+        "total": 0,
+        "next_cursor": "eyJsYXRlc3..",
         "prev_cursor": null,
         "direction": "Next"
     }
@@ -412,24 +387,29 @@ https://kioskapp.venture23.xyz/api/v1/
 ##### Get Kiosks Items
 
 ```
-GET /kiosk/items/{kiosk_id}
+GET /items
 ```
 
 #### Description
 
-Retrieve information about items associated with a specific kiosk identified by its ID, with optional limit, sorting, and pagination.
+Retrieve information about items associated with a specific kiosk identified by its ID, with optional filtration, limit, sorting, and pagination.
 
 #### Parameters
 
--   `kiosk_id`(required): The unique identifier of the kiosk id.
--   `direction` (optional): The direction of sorting. Possible values are `asc` (ascending) and `desc` (descending).
--   `next_cursor` (optional): Cursor for pagination. If provided, it retrieves the next page of results.
--   `prev_cursor` (optional): Cursor for pagination. If provided, it retrieves the previous page of results.
+-   `filter.kiosk_id` (optional): Get items of kiosk.
+-   `filter.collection` (optional): Filter kiosk items by item collection type.
+-   `filter.price.min/max` (optional): Filter listed items between listed price range.
+-   `sort.field` (optional): The field to sort the items by. Possible values are fields of item object,
+-   `sort.direction` (optional): The direction of sorting. Possible values are `asc` (ascending) and `desc` (descending).
+-   `show` (optional): The field to filter item list by. Possible values are `all`, `listed`, `nonlisted`. Default: `all`
+-   `details` (optional): The field to get item list with or without item details. Possible values are `true`, `false`. Default: `true`.
+-   `page.limit` (optional): The maximum number of items to return per page. Default is 20.
+-   `page.next_cursor` (optional): Cursor for pagination. If provided, it retrieves the next page of results.
 
 #### Example Request
 
 ```
-curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/items/0x25f7579bf0baadc72a80357141a0e2e0ff06914a2c832ba1f474f55930d4a4eb?next_cursor=&prev_cursor=&limit=1'
+curl --location 'https://kioskapp.venture23.xyz/api/v1/items?page.limit=1&details=true&show=all&filter.kiosk_id=0x8c656964819fd6cd3b344483a7ad43744a506340bf1b1b6a99d34eded537ba2a&filter.price.min=18446744033.709553&filter.collection=0xe638169c0c173d069996cace570b44cf6cb48365c77a058cb4a9bf8ad757a51d::eggdeniyi::AfEggdeniyi&sort.field=_id&sort.direction=desc'
 ```
 
 #### Example Response
@@ -438,70 +418,28 @@ curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/items/0x25f7579bf0b
 {
     "data": [
         {
-            "id": "0xb11c8abb2c1b00facaeb5d584b01d3db5c3f9c9b56adb7789e4120a4e9708bb8",
-            "version": 25033029,
-            "created_at": 1715603925703,
-            "updated_at": 1715603965225,
-            "owner": "0xb356a3eceb5df30fd4b80b5b15be244dbfa2aecefeebc748227d91c70580fb5a",
-            "previous_transaction": "AcyfzgX1tb3Ypgbmr5qAo6ZzcuguXnFxJqTPtTMheq8C",
-            "storage_rebate": 2287600,
-            "type_": {
-                "full": "0xe1ab956722f0544979729d679411b87fd448dce82564007ca8935803b1d2f214::nft::Sword",
-                "package": "0xe1ab956722f0544979729d679411b87fd448dce82564007ca8935803b1d2f214",
-                "module": "nft",
-                "struct": "Sword",
-                "generics": []
-            },
-            "ownership_type": "Object",
-            "lock": {
-                "id": "0x2ad7fdb5217407e91fd84230bbf1963425b3c79246f94440ecc7b50450b79964",
-                "version": 25033029,
-                "digest": "58Z9zx3BDwFbU9zf8CtvDax4qeJJHpfofbacBD1Gw6Qt",
-                "owner": "0x25f7579bf0baadc72a80357141a0e2e0ff06914a2c832ba1f474f55930d4a4eb",
-                "ownership_type": "Object",
-                "previous_transaction": "AcyfzgX1tb3Ypgbmr5qAo6ZzcuguXnFxJqTPtTMheq8C",
-                "value": "test",
-                "details": {
+            "_id": "0xf76d49d05b513ffedbc6497d22d68845e03f9be6918ef265430de0b66c9598f9",
+            "item_id": "0x991e0d499380c77cd71912803aebdc7a59a09dbe79f9bd5c3f8a4cb6060a2c97",
+            "type": "0x2::dynamic_field::Field<0x2::dynamic_object_field::Wrapper<0x2::kiosk::Item>, 0x2::object::ID>",
+            "kiosk_id": "0x8c656964819fd6cd3b344483a7ad43744a506340bf1b1b6a99d34eded537ba2a",
+            "created_at": 1716459042633,
+            "item_detail": {
+                "object_id": "0x991e0d499380c77cd71912803aebdc7a59a09dbe79f9bd5c3f8a4cb6060a2c97",
+                "type": "0xe638169c0c173d069996cace570b44cf6cb48365c77a058cb4a9bf8ad757a51d::eggdeniyi::AfEggdeniyi",
+                "version": "39275391",
+                "previous_transaction": "B9NMPMhrtfmfxhfHbZzWhqVQucNGrFcQrgL5dgFs1BkH",
+                "fields": {
                     "id": {
-                        "value": "0x2ad7fdb5217407e91fd84230bbf1963425b3c79246f94440ecc7b50450b79964"
-                    },
-                    "name": {
-                        "type_": "0x2::kiosk::Lock",
-                        "fields": {
-                            "id": {
-                                "value": "0xb11c8abb2c1b00facaeb5d584b01d3db5c3f9c9b56adb7789e4120a4e9708bb8"
-                            }
-                        }
-                    },
-                    "value": {
-                        "value": true
+                        "id": "0x991e0d499380c77cd71912803aebdc7a59a09dbe79f9bd5c3f8a4cb6060a2c97"
                     }
-                }
-            },
-            "listing": null,
-            "details": {
-                "description": {
-                    "value": "Selling Rare NFT"
-                },
-                "id": {
-                    "value": "0xb11c8abb2c1b00facaeb5d584b01d3db5c3f9c9b56adb7789e4120a4e9708bb8"
-                },
-                "name": {
-                    "value": "Kiosk NFT"
-                },
-                "strength": {
-                    "value": "50"
-                },
-                "url": {
-                    "value": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8gtNrUa5bVR8qWLQIJiuG99NR2xUaUqV89qXg6WiLcQ&s"
                 }
             }
         }
     ],
     "page_info": {
         "limit": 1,
-        "total": 9,
-        "next_cursor": "UQAAAAJfaWQAQwAAADB4YjM1NmEzZWNlYjVkZjMwZmQ0YjgwYjViMTViZTI0NGRiZmEyYWVjZWZlZWJjNzQ4MjI3ZDkxYzcwNTgwZmI1YQAA",
+        "total": 0,
+        "next_cursor": "eyJsYXR...",
         "prev_cursor": null,
         "direction": "Next"
     }
