@@ -30,25 +30,24 @@ Gophish returns the following status codes in its API:
 | 404         | `NOT FOUND`             |
 | 500         | `INTERNAL SERVER ERROR` |
 
--   APIs
-    -   [Basic](#basic)
-        -   ReadOnly APIs
-            -   [kiosks](#kiosks-list)
-            -   [Kiosks by Sui Address](#kiosks-by-sui-address)
-            -   [kiosk detail](#get_kiosk_detail)
-            -   [object detail](#get_object_detail)
-            -   [items](#get_items)
-            -   [Kiosk Items of Sui Address (Listed/Nonlisted)](#kiosk-items-of-sui-address)
-            -   [summary metric](#get_kiosk_summary)
-            -   [kiosk item history](#get_kiosk_item_history)
-            -   [kiosk transactions](#get_kiosk_transactions)
-            -   [single kiosk transactions](#get_single_kiosk_transactions)
-            -   [kiosk extensions](#get_kiosk_extensions)
-            -   [kiosk profit withdraws](#get_kiosk_profit_withdraws)
-            -   [kiosk graph](#get_kiosk_graph)
-            -   [item transfer policies](#get_item_transfer_policies)
-            -   [transaction details](#get_transaction_details)
-            -   [search](#search)
+- APIs
+  - [Basic](#basic)
+    - ReadOnly APIs
+      - [Kiosks](#kiosks-list)
+      - [Kiosk Detail](#get_kiosk_detail)
+      - [Object Detail](#get_object_detail)
+      - [Items](#get_items)
+      - [Kiosk Items of Sui Address (Listed/Nonlisted)](#kiosk-items-of-sui-address)
+      - [Summary Metric](#get_kiosk_summary)
+      - [Kiosk Item History](#get_kiosk_item_history)
+      - [Kiosk Transactions](#get_kiosk_transactions)
+      - [Single Kiosk Transactions](#get_single_kiosk_transactions)
+      - [Kiosk Extensions](#get_kiosk_extensions)
+      - [Kiosk Profit Withdraws](#get_kiosk_profit_withdraws)
+      - [Kiosk Graph](#get_kiosk_graph)
+      - [Item Transfer Policies](#get_item_transfer_policies)
+      - [Transaction Details](#get_transaction_details)
+      - [Search](#search)
 
 ### Kiosks List
 
@@ -76,12 +75,12 @@ Retrieve a list of kiosks with optional filtering, sorting, and pagination.
 
 #### Parameters
 
--   `account` (optional): Get kiosks by account address.
--   `filter.{profit/item_count}.min/max` (Optional): Filter kiosks in range between min and max field_name value. For instance, filter.profit.min=10&filter.profit.min=100, gets all kiosks containing profits between 10 and 100.
--   `page.limit` (optional): The maximum number of kiosks to return per page. Default is 20.
--   `page.next_cursor` (optional): Cursor for pagination. If provided, it retrieves the next page of results.
--   `sort.field` (optional): The field to sort the kiosks by. Possible values are fields in api response. Default is `-timestamp`,
--   `sort.direction` (optional): The direction of sorting. Possible values are `asc` (ascending) and `desc` (descending).
+- `account` (optional): Get kiosks by account address.
+- `filter.{profit/item_count}.min/max` (Optional): Filter kiosks in range between min and max field_name value. For instance, filter.profit.min=10&filter.profit.max=100, gets all kiosks containing profits between 10 and 100.
+- `page.limit` (optional): The maximum number of kiosks to return per page. Default is 20.
+- `page.next_cursor` (optional): Cursor for pagination. If provided, it retrieves the next page of results.
+- `sort.field` (optional): The field to sort the kiosks by. Possible values are fields in api response. Default is `-timestamp`,
+- `sort.direction` (optional): The direction of sorting. Possible values are `asc` (ascending) and `desc` (descending).
 
 #### Example Request
 
@@ -114,75 +113,6 @@ curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosks?page.limit=1&sort.
 }
 ```
 
-### Kiosks by Sui Address
-
-#### Overview
-
-This API provides access to information about kiosk of particular owner.
-
-#### Base URL
-
-```
-https://kioskapp.venture23.xyz/api/v1/
-```
-
-#### Endpoints
-
-##### Get Kiosks
-
-```
-GET kiosks/account/{owner_id}
-```
-
-#### Description
-
-Retrieve a list of kiosks with optional filtering, sorting, and pagination.
-
-#### Parameters
-
--   `limit` (optional): The maximum number of kiosks to return per page. Default is 20.
--   `next_cursor` (optional): Cursor for pagination. If provided, it retrieves the next page of results.
--   `prev_cursor` (optional): Cursor for pagination. If provided, it retrieves the previous page of results.
-
-#### Example Request
-
-```
-curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosks/account/0xc0a7b1e6c40870567c6f916bc578161823dfaec0cc6841622b124f15638fc792?limit=5&next_cursor=""'
-```
-
-#### Example Response
-
-```
-{
-    "data": [
-        {
-            "kiosk_id": "0x2e49e8dd47577b27e4d386ae04e4c853150d43e5cf1af2382204c8700c442ccc",
-            "version": "1173621",
-            "owner": "0xc0a7b1e6c40870567c6f916bc578161823dfaec0cc6841622b124f15638fc792",
-            "item_count": 6,
-            "profits": "210000000",
-            "mutated_at": 1720679347378
-        },
-        {
-            "kiosk_id": "0xac06e8500db047bf13429fceed20c92a4d5ee0559be932d2ba1112aa4327632f",
-            "version": "1173616",
-            "owner": "0xc0a7b1e6c40870567c6f916bc578161823dfaec0cc6841622b124f15638fc792",
-            "item_count": 3,
-            "profits": "0",
-            "created_at": 1720679286391,
-            "mutated_at": 1720679330593
-        }
-    ],
-    "page_info": {
-        "limit": 5,
-        "total": 0,
-        "next_cursor": "\"\"",
-        "prev_cursor": null,
-        "direction": "Next"
-    }
-}
-```
-
 ### get_kiosk_detail
 
 #### Overview
@@ -209,7 +139,7 @@ Retrieve detailed information about a specific kiosk identified by its ID.
 
 #### Parameters
 
--   {kiosk_id}: The unique identifier of the kiosk.
+- {kiosk_id}: The unique identifier of the kiosk.
 
 #### Example Request
 
@@ -396,15 +326,15 @@ Retrieve information about items associated with a specific kiosk identified by 
 
 #### Parameters
 
--   `filter.kiosk_id` (optional): Get items of kiosk.
--   `filter.collection` (optional): Filter kiosk items by item collection type.
--   `filter.price.min/max` (optional): Filter listed items between listed price range.
--   `sort.field` (optional): The field to sort the items by. Possible values are fields of item object,
--   `sort.direction` (optional): The direction of sorting. Possible values are `asc` (ascending) and `desc` (descending).
--   `show` (optional): The field to filter item list by. Possible values are `all`, `listed`, `nonlisted`. Default: `all`
--   `details` (optional): The field to get item list with or without item details. Possible values are `true`, `false`. Default: `true`.
--   `page.limit` (optional): The maximum number of items to return per page. Default is 20.
--   `page.next_cursor` (optional): Cursor for pagination. If provided, it retrieves the next page of results.
+- `filter.kiosk_id` (optional): Get items of kiosk.
+- `filter.collection` (optional): Filter kiosk items by item collection type.
+- `filter.price.min/max` (optional): Filter listed items between listed price range.
+- `sort.field` (optional): The field to sort the items by. Possible values are fields of item object,
+- `sort.direction` (optional): The direction of sorting. Possible values are `asc` (ascending) and `desc` (descending).
+- `show` (optional): The field to filter item list by. Possible values are `all`, `listed`, `nonlisted`. Default: `all`
+- `details` (optional): The field to get item list with or without item details. Possible values are `true`, `false`. Default: `true`.
+- `page.limit` (optional): The maximum number of items to return per page. Default is 20.
+- `page.next_cursor` (optional): Cursor for pagination. If provided, it retrieves the next page of results.
 
 #### Example Request
 
@@ -472,13 +402,13 @@ Retrieve a list of items in all the kiosk with optional filtering, sorting, and 
 
 #### Parameters
 
--   `page.limit` (optional): The maximum number of kiosks to return per page. Default is 20.
--   `sort.field` (optional): The field to sort the kiosks by. Possible values are all dynamic fields of item object like `name`, `description`, etc.. Default: `-mutated_at`,
--   `sort.direction` (optional): The direction of sorting. Possible values are `asc` (ascending) and `desc` (descending).
--   `page.next_cursor` (optional): Cursor for pagination. If provided, it retrieves the next page of results.
--   `page.prev_cursor` (optional): Cursor for pagination. If provided, it retrieves the previous page of results.
--   `show` (optional): The field to filter item list by. Possible values are `all`, `listed`, `nonlisted`. Default: `all`
--   `details` (optional): The field to get item list with or without item details. Possible values are `true`, `false`. Default: `true`.
+- `page.limit` (optional): The maximum number of kiosks to return per page. Default is 20.
+- `sort.field` (optional): The field to sort the kiosks by. Possible values are all dynamic fields of item object like `name`, `description`, etc.. Default: `-mutated_at`,
+- `sort.direction` (optional): The direction of sorting. Possible values are `asc` (ascending) and `desc` (descending).
+- `page.next_cursor` (optional): Cursor for pagination. If provided, it retrieves the next page of results.
+- `page.prev_cursor` (optional): Cursor for pagination. If provided, it retrieves the previous page of results.
+- `show` (optional): The field to filter item list by. Possible values are `all`, `listed`, `nonlisted`. Default: `all`
+- `details` (optional): The field to get item list with or without item details. Possible values are `true`, `false`. Default: `true`.
 
 #### Example Request
 
@@ -639,7 +569,7 @@ Retrieve details about a specific object.
 
 #### Parameters
 
--   {object_id} (required): The unique identifier of the object.
+- {object_id} (required): The unique identifier of the object.
 
 #### Example Request
 
@@ -720,8 +650,8 @@ Retrieve details about transactions related to kiosks.
 
 #### Parameters
 
--   `limit` (optional): Limit the number of transactions returned. Default is 20.
--   `offset` (optional): Offset for pagination. Default is 0.
+- `limit` (optional): Limit the number of transactions returned. Default is 20.
+- `offset` (optional): Offset for pagination. Default is 0.
 
 #### Example Request
 
@@ -880,10 +810,10 @@ Retrieve transaction data associated with a specific kiosk.
 
 #### Parameters
 
--   `kiosk_id` (string): The ID of the kiosk.
--   `limit` (optional): Limit the number of transactions returned. Default is 20.
--   `limit` (optional): Limit the number of transactions returned. Default is 20.
--   `offset` (optional): Offset for pagination. Default is 0.
+- `kiosk_id` (string): The ID of the kiosk.
+- `limit` (optional): Limit the number of transactions returned. Default is 20.
+- `limit` (optional): Limit the number of transactions returned. Default is 20.
+- `offset` (optional): Offset for pagination. Default is 0.
 
 #### Example Request
 
@@ -1049,7 +979,7 @@ Retrieve a history of actions performed on items associated with a specific kios
 
 #### Parameters
 
--   `kiosk_id` (required): The ID of the kiosk.
+- `kiosk_id` (required): The ID of the kiosk.
 
 #### Example Request
 
@@ -1107,9 +1037,9 @@ Retrieve information about withdrawals made from a specific kiosk.
 
 #### Parameters
 
--   `kiosk_id` (required): The ID of the kiosk for which you want to retrieve withdrawal information.
--   `limit` (optional): Limit the number of transactions returned. Default is 20.
--   `offset` (optional): Offset for pagination. Default is 0.
+- `kiosk_id` (required): The ID of the kiosk for which you want to retrieve withdrawal information.
+- `limit` (optional): Limit the number of transactions returned. Default is 20.
+- `offset` (optional): Offset for pagination. Default is 0.
 
 #### Example Request
 
@@ -1163,11 +1093,11 @@ Retrieve information about extensions associated with a specific kiosk.
 
 #### Parameters
 
--   `kiosk_id` (required): The ID of the kiosk.
--   `limit` (optional): The maximum number of kiosks to return per page. Default is 20.
--   `direction` (optional): The direction of sorting. Possible values are `asc` (ascending) and `desc` (descending).
--   `next_cursor` (optional): Cursor for pagination. If provided, it retrieves the next page of results.
--   `prev_cursor` (optional): Cursor for pagination. If provided, it retrieves the previous page of results.
+- `kiosk_id` (required): The ID of the kiosk.
+- `limit` (optional): The maximum number of kiosks to return per page. Default is 20.
+- `direction` (optional): The direction of sorting. Possible values are `asc` (ascending) and `desc` (descending).
+- `next_cursor` (optional): Cursor for pagination. If provided, it retrieves the next page of results.
+- `prev_cursor` (optional): Cursor for pagination. If provided, it retrieves the previous page of results.
 
 #### Example Request
 
@@ -1275,10 +1205,10 @@ And the range of time with the frequency.
 
 #### Parameters
 
--   `graph` (required): graph for the given query params (creation/withdrawl/item)
--   `from` (required): start time of the range in Unix timestamp format.
--   `to` (required): the end time of the range in Unix timestamp format.
--   `freq` (required): the frequency at which data points should be aggregated, in this case, per day.
+- `graph` (required): graph for the given query params (creation/withdrawl/item)
+- `from` (required): start time of the range in Unix timestamp format.
+- `to` (required): the end time of the range in Unix timestamp format.
+- `freq` (required): the frequency at which data points should be aggregated, in this case, per day.
 
 #### Example Request
 
@@ -1327,11 +1257,11 @@ This endpoint retrieves information about an item policy associated with the ite
 
 #### Parameters
 
--   `item_id` : The unique identifier of the item id.
--   `limit` (optional): The maximum number of kiosks to return per page. Default is 20.
--   `direction` (optional): The direction of sorting. Possible values are `asc` (ascending) and `desc` (descending).
--   `next_cursor` (optional): Cursor for pagination. If provided, it retrieves the next page of results.
--   `prev_cursor` (optional): Cursor for pagination. If provided, it retrieves the previous page of results.
+- `item_id` : The unique identifier of the item id.
+- `limit` (optional): The maximum number of kiosks to return per page. Default is 20.
+- `direction` (optional): The direction of sorting. Possible values are `asc` (ascending) and `desc` (descending).
+- `next_cursor` (optional): Cursor for pagination. If provided, it retrieves the next page of results.
+- `prev_cursor` (optional): Cursor for pagination. If provided, it retrieves the previous page of results.
 
 #### Example Request
 
@@ -1455,7 +1385,7 @@ This endpoint retrieves information about the transactions from the given digest
 
 #### Parameters
 
--   `tx_digest` : The unique identifier of transaction digest.
+- `tx_digest` : The unique identifier of transaction digest.
 
 #### Example Request
 
@@ -1695,7 +1625,7 @@ This endpoint retrieves information of the search request as per transaction dig
 
 #### Parameters
 
--   `tx_digest/object_id` : The unique identifier of transaction digest or object id.
+- `tx_digest/object_id` : The unique identifier of transaction digest or object id.
 
 #### Example Request
 
