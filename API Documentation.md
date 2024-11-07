@@ -58,7 +58,7 @@ This API provides access to information about kiosks.
 #### Base URL
 
 ```
-https://kioskapp.venture23.xyz/api/v1/
+https://mainnet-kiosk-app.venture23.xyz/api/v1/
 ```
 
 #### Endpoints
@@ -85,7 +85,7 @@ Retrieve a list of kiosks with optional filtering, sorting, and pagination.
 #### Example Request
 
 ```
-curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosks?page.limit=1&sort.field=item_count&sort.direction=desc&page.next_cursor=&filter.profit.min=10'
+curl --location 'https://mainnet-kiosk-app.venture23.xyz/api/v1/kiosks?page.limit=1&sort.field=item_count&sort.direction=desc&page.next_cursor=&filter.profit.min=10'
 ```
 
 #### Example Response
@@ -122,7 +122,7 @@ This API endpoint provides detailed information about a specific kiosk.
 #### Base URL
 
 ```
-https://kioskapp.venture23.xyz/api/v1/
+https://mainnet-kiosk-app.venture23.xyz/api/v1/
 ```
 
 #### Endpoints
@@ -144,7 +144,7 @@ Retrieve detailed information about a specific kiosk identified by its ID.
 #### Example Request
 
 ```
-curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/detail/0x25f7579bf0baadc72a80357141a0e2e0ff06914a2c832ba1f474f55930d4a4eb'
+curl --location 'https://mainnet-kiosk-app.venture23.xyz/api/v1/kiosk/detail/0x25f7579bf0baadc72a80357141a0e2e0ff06914a2c832ba1f474f55930d4a4eb'
 ```
 
 #### Example Response
@@ -224,7 +224,7 @@ GET  /api/v1/kiosk/detail/<kiosk_id>
 
 cURL
 ```
-curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/detail/0x720396e6f8cb22c5362eb2163886302a6e7d73f3eee1b72f1a35a6a7d601bf28'
+curl --location 'https://mainnet-kiosk-app.venture23.xyz/api/v1/kiosk/detail/0x720396e6f8cb22c5362eb2163886302a6e7d73f3eee1b72f1a35a6a7d601bf28'
 ```
 
 *Parameters:*
@@ -309,7 +309,7 @@ This API endpoint provides information about items associated with a specific ki
 #### Base URL
 
 ```
-https://kioskapp.venture23.xyz/api/v1/
+https://mainnet-kiosk-app.venture23.xyz/api/v1/
 ```
 
 #### Endpoints
@@ -339,7 +339,7 @@ Retrieve information about items associated with a specific kiosk identified by 
 #### Example Request
 
 ```
-curl --location 'https://kioskapp.venture23.xyz/api/v1/items?page.limit=1&details=true&show=all&filter.kiosk_id=0x8c656964819fd6cd3b344483a7ad43744a506340bf1b1b6a99d34eded537ba2a&filter.price.min=18446744033.709553&filter.collection=0xe638169c0c173d069996cace570b44cf6cb48365c77a058cb4a9bf8ad757a51d::eggdeniyi::AfEggdeniyi&sort.field=_id&sort.direction=desc'
+curl --location 'https://mainnet-kiosk-app.venture23.xyz/api/v1/items?page.limit=1&details=true&show=all&filter.kiosk_id=0x8c656964819fd6cd3b344483a7ad43744a506340bf1b1b6a99d34eded537ba2a&filter.price.min=18446744033.709553&filter.collection=0xe638169c0c173d069996cace570b44cf6cb48365c77a058cb4a9bf8ad757a51d::eggdeniyi::AfEggdeniyi&sort.field=_id&sort.direction=desc'
 ```
 
 #### Example Response
@@ -385,7 +385,7 @@ This API provides access to information about items inside all the kiosk of part
 #### Base URL
 
 ```
-https://kioskapp.venture23.xyz/api/v1/
+https://mainnet-kiosk-app.venture23.xyz/api/v1/
 ```
 
 #### Endpoints
@@ -413,7 +413,7 @@ Retrieve a list of items in all the kiosk with optional filtering, sorting, and 
 #### Example Request
 
 ```
-curl --location 'https://kioskapp.venture23.xyz/api/v1/account/0xc0a7b1e6c40870567c6f916bc578161823dfaec0cc6841622b124f15638fc792/kiosk/items?page.limit=20&page.next_cursor=eyJpZCI6IjB4YmJhODFlNjgxZWI3NmViNjc0ZWNjZWNkYjBlNjIzMjUxOTRkYTQxMjMxYTFmNjViMTc5NTE5M2MwNDRiZDgxZSJ9&details=true&show=nonlisted&sort.field=name&sort.direction=asc
+curl --location 'https://mainnet-kiosk-app.venture23.xyz/api/v1/account/0xc0a7b1e6c40870567c6f916bc578161823dfaec0cc6841622b124f15638fc792/kiosk/items?page.limit=20&page.next_cursor=eyJpZCI6IjB4YmJhODFlNjgxZWI3NmViNjc0ZWNjZWNkYjBlNjIzMjUxOTRkYTQxMjMxYTFmNjViMTc5NTE5M2MwNDRiZDgxZSJ9&details=true&show=nonlisted&sort.field=name&sort.direction=asc'
 ```
 
 #### Example Response
@@ -552,7 +552,7 @@ This API provides access to information about objects.
 #### Base URL
 
 ```
-https://kioskapp.venture23.xyz/api/v1/
+https://mainnet-kiosk-app.venture23.xyz/api/v1/
 ```
 
 #### Endpoints
@@ -574,7 +574,7 @@ Retrieve details about a specific object.
 #### Example Request
 
 ```
-curl --location 'https://kioskapp.venture23.xyz/api/v1/object/0xb11c8abb2c1b00facaeb5d584b01d3db5c3f9c9b56adb7789e4120a4e9708bb8'
+curl --location 'https://mainnet-kiosk-app.venture23.xyz/api/v1/object/0xb11c8abb2c1b00facaeb5d584b01d3db5c3f9c9b56adb7789e4120a4e9708bb8'
 ```
 
 #### Example Response
@@ -633,7 +633,7 @@ This API provides access to information about transactions related to all the ki
 #### Base URL
 
 ```
-https://kioskapp.venture23.xyz/api/v1/
+https://mainnet-kiosk-app.venture23.xyz/api/v1/
 ```
 
 #### Endpoints
@@ -656,7 +656,7 @@ Retrieve details about transactions related to kiosks.
 #### Example Request
 
 ```
-curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/transactions?limit=1&offset=0'
+curl --location 'https://mainnet-kiosk-app.venture23.xyz/api/v1/kiosk/transactions?limit=1&offset=0'
 ```
 
 #### Example Response
@@ -793,7 +793,7 @@ This API provides transaction data associated with a specific kiosk.
 #### Base URL
 
 ```
-https://kioskapp.venture23.xyz/api/v1/
+https://mainnet-kiosk-app.venture23.xyz/api/v1/
 ```
 
 #### Endpoints
@@ -818,7 +818,7 @@ Retrieve transaction data associated with a specific kiosk.
 #### Example Request
 
 ```
-curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/0x25f7579bf0baadc72a80357141a0e2e0ff06914a2c832ba1f474f55930d4a4eb/transactions?limit=1&&offset=0'
+curl --location 'https://mainnet-kiosk-app.venture23.xyz/api/v1/kiosk/0x25f7579bf0baadc72a80357141a0e2e0ff06914a2c832ba1f474f55930d4a4eb/transactions?limit=1&&offset=0'
 ```
 
 #### Example Response
@@ -918,7 +918,7 @@ This API provides access to information about objects.
 #### Base URL
 
 ```
-https://kioskapp.venture23.xyz/api/v1/
+https://mainnet-kiosk-app.venture23.xyz/api/v1/
 ```
 
 #### Endpoints
@@ -936,7 +936,7 @@ Retrieve a summary of statistics related to kiosks.
 #### Example Request
 
 ```
-curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/summary'
+curl --location 'https://mainnet-kiosk-app.venture23.xyz/api/v1/kiosk/summary'
 ```
 
 #### Example Response
@@ -962,7 +962,7 @@ This API provides a history of actions performed on items associated with a spec
 #### Base URL
 
 ```
-https://kioskapp.venture23.xyz/api/v1/
+https://mainnet-kiosk-app.venture23.xyz/api/v1/
 ```
 
 #### Endpoints
@@ -984,7 +984,7 @@ Retrieve a history of actions performed on items associated with a specific kios
 #### Example Request
 
 ```
-curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/0x25f7579bf0baadc72a80357141a0e2e0ff06914a2c832ba1f474f55930d4a4eb/items/history'
+curl --location 'https://mainnet-kiosk-app.venture23.xyz/api/v1/kiosk/0x25f7579bf0baadc72a80357141a0e2e0ff06914a2c832ba1f474f55930d4a4eb/items/history'
 ```
 
 #### Example Response
@@ -1020,7 +1020,7 @@ This API endpoint allows you to retrieve information about withdrawals made from
 #### Base URL
 
 ```
-https://kioskapp.venture23.xyz/api/v1/
+https://mainnet-kiosk-app.venture23.xyz/api/v1/
 ```
 
 #### Endpoints
@@ -1044,7 +1044,7 @@ Retrieve information about withdrawals made from a specific kiosk.
 #### Example Request
 
 ```
-curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/0x25f7579bf0baadc72a80357141a0e2e0ff06914a2c832ba1f474f55930d4a4eb/items/history'
+curl --location 'https://mainnet-kiosk-app.venture23.xyz/api/v1/kiosk/0x25f7579bf0baadc72a80357141a0e2e0ff06914a2c832ba1f474f55930d4a4eb/items/history'
 ```
 
 #### Example Response
@@ -1076,7 +1076,7 @@ This API provides information about extensions associated with a specific kiosk.
 #### Base URL
 
 ```
-https://kioskapp.venture23.xyz/api/v1/
+https://mainnet-kiosk-app.venture23.xyz/api/v1/
 ```
 
 #### Endpoints
@@ -1102,7 +1102,7 @@ Retrieve information about extensions associated with a specific kiosk.
 #### Example Request
 
 ```
-curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosks/0x18ed34f58368d5927a3789e0ed55c2948175f5548d3b4b4aa29bbbda8b6db1eb/extensions'
+curl --location 'https://mainnet-kiosk-app.venture23.xyz/api/v1/kiosks/0x18ed34f58368d5927a3789e0ed55c2948175f5548d3b4b4aa29bbbda8b6db1eb/extensions'
 ```
 
 #### Example Response
@@ -1187,7 +1187,7 @@ This API endpoint allows you to retrieve graph data related to kiosks.
 #### Base URL
 
 ```
-https://kioskapp.venture23.xyz/api/v1/
+https://mainnet-kiosk-app.venture23.xyz/api/v1/
 ```
 
 #### Endpoints
@@ -1213,7 +1213,7 @@ And the range of time with the frequency.
 #### Example Request
 
 ```
-curl --location 'https://kioskapp.venture23.xyz/api/v1/kiosk/graph?graph=creation&from=1713112971&to=1715704971&freq=day'
+curl --location 'https://mainnet-kiosk-app.venture23.xyz/api/v1/kiosk/graph?graph=creation&from=1713112971&to=1715704971&freq=day'
 ```
 
 #### Example Response
@@ -1240,7 +1240,7 @@ This API provides information about transfer policies.
 #### Base URL
 
 ```
-https://kioskapp.venture23.xyz/api/v1/
+https://mainnet-kiosk-app.venture23.xyz/api/v1/
 ```
 
 #### Endpoints
@@ -1266,7 +1266,7 @@ This endpoint retrieves information about an item policy associated with the ite
 #### Example Request
 
 ```
-curl --location https://kioskapp.venture23.xyz/api/v1/item-policy/0xb11c8abb2c1b00facaeb5d584b01d3db5c3f9c9b56adb7789e4120a4e9708bb8?limit=1
+curl --location https://mainnet-kiosk-app.venture23.xyz/api/v1/item-policy/0xb11c8abb2c1b00facaeb5d584b01d3db5c3f9c9b56adb7789e4120a4e9708bb8?limit=1
 ```
 
 #### Example Response
@@ -1368,7 +1368,7 @@ This API provides information about the transaction details
 #### Base URL
 
 ```
-https://kioskapp.venture23.xyz/api/v1/
+https://mainnet-kiosk-app.venture23.xyz/api/v1/
 ```
 
 #### Endpoints
@@ -1390,7 +1390,7 @@ This endpoint retrieves information about the transactions from the given digest
 #### Example Request
 
 ```
-curl --location https://kioskapp.venture23.xyz/api/v1/tx/V4CpxhJhvLVaApoEhX2aNcQHkDacGFLUFyNW9Wsrzr3
+curl --location https://mainnet-kiosk-app.venture23.xyz/api/v1/tx/V4CpxhJhvLVaApoEhX2aNcQHkDacGFLUFyNW9Wsrzr3
 ```
 
 #### Example Response
@@ -1608,7 +1608,7 @@ This API provides search for transaction digest and object id
 #### Base URL
 
 ```
-https://kioskapp.venture23.xyz/api/v1/
+https://mainnet-kiosk-app.venture23.xyz/api/v1/
 ```
 
 #### Endpoints
@@ -1630,7 +1630,7 @@ This endpoint retrieves information of the search request as per transaction dig
 #### Example Request
 
 ```
-curl --location https://kioskapp.venture23.xyz/api/v1/search/V4CpxhJhvLVaApoEhX2aNcQHkDacGFLUFyNW9Wsrzr3
+curl --location https://mainnet-kiosk-app.venture23.xyz/api/v1/search/V4CpxhJhvLVaApoEhX2aNcQHkDacGFLUFyNW9Wsrzr3
 ```
 
 #### Example Response
